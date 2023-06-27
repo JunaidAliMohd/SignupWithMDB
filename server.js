@@ -4,6 +4,9 @@ const mysql = require("mysql");
 const multer = require("multer");
 let mongoose = require("mongoose");
 let path = require("path");
+let dotenv = require("dotenv");
+
+dotenv.config();
 
 const storage = multer.diskStorage({
   destination:  (req, file, cb) => {
@@ -81,7 +84,7 @@ app.listen(4567, () => {
 
 let connectToMDB = async () => {
     try {
-        await mongoose.connect("mongodb+srv://junaidali3089:junaidali3089@cluster0.how6mo0.mongodb.net/UserData?retryWrites=true&w=majority");
+        await mongoose.connect(process.env.mdburl);
 
         console.log("connected to mdb");
     } catch {
