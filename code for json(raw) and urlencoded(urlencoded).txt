@@ -1,0 +1,694 @@
+For creating dummy account data
+
+==>in server
+
+
+================================================
+const express = require("express");
+const cors = require("cors");
+
+const app = express();
+app.use(cors());
+
+app.post("/signup", (req, res) => {
+    res.json([`dummy account created successfully`]);
+})
+
+app.listen(4567, () => {
+    console.log(`listening to port 4567`);
+})
+
+
+
+====================================================
+
+==>in app.js
+==>in components/signup
+==>in signup
+
+================================
+
+
+
+import React, { useRef } from 'react'
+
+function Signup() {
+
+    let nameInputRef = useRef();
+    let mobileNoInputRef = useRef();
+    let ageInputRef = useRef();
+    let emailInputRef = useRef();
+    let passwordInputRef = useRef();
+    let profilePicInputRef = useRef();
+
+    let signupToSever = async () => {
+        
+        let reqOptions = {
+            method:"POST"
+        }
+
+
+        let JSONData = await fetch("http://localhost:4567/signup", reqOptions);
+        let JSOData = await JSONData.json();
+        console.log(JSOData);
+    }
+  return (
+      <div>
+          <form>
+              <div>
+                  <label>Name</label>
+                  <input ref={nameInputRef}></input>
+              </div>
+              <div>
+                  <label>Mobile No.</label>
+                  <input ref={mobileNoInputRef}></input>
+              </div>
+              <div>
+                  <label>Age</label>
+                  <input ref={ageInputRef}></input>
+              </div>
+              <div>
+                  <label>Email</label>
+                  <input ref={emailInputRef}></input>
+              </div>
+              <div>
+                  <label>Password</label>
+                  <input ref={passwordInputRef}></input>
+              </div>
+              <div>
+                  <label>Profile Pic</label>
+                  <input ref={profilePicInputRef}></input>
+              </div>
+              <div>
+                  <button
+                      type="button"
+                      onClick={() => {
+                          signupToSever();
+                  }}>Submit</button>
+              </div>
+          </form>
+    </div>
+  )
+}
+
+export default Signup
+
+
+=========================================
+
+==> for json
+
+======================================
+
+
+==> in server
+
+========================================
+const express = require("express");
+const cors = require("cors");
+const mysql = require("mysql");
+
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.post("/signup", (req, res) => {
+    console.log(req.body);
+    res.json([`dummy account created successfully`]);
+})
+
+app.listen(4567, () => {
+    console.log(`listening to port 4567`);
+})
+
+
+========================================
+
+==>in app.js
+
+=======================================================
+
+
+import React, { useRef } from 'react'
+
+function Signup() {
+
+    let nameInputRef = useRef();
+    let mobileNoInputRef = useRef();
+    let ageInputRef = useRef();
+    let emailInputRef = useRef();
+    let passwordInputRef = useRef();
+    let profilePicInputRef = useRef();
+
+    let signupToSever = async () => {
+
+        let dataToSend = {
+            name: nameInputRef.current.value,
+            mobileNO: mobileNoInputRef.current.value,
+            age: ageInputRef.current.value,
+            email: emailInputRef.current.value,
+            password: passwordInputRef.current.value,
+        };
+
+        let myHeaders = new Headers()
+        myHeaders.append("content-type", "application/json");
+
+        
+        let reqOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: JSON.stringify(dataToSend),
+        };
+
+
+        let JSONData = await fetch("http://localhost:4567/signup", reqOptions);
+        let JSOData = await JSONData.json();
+        console.log(JSOData);
+    }
+  return (
+      <div>
+          <form>
+              <div>
+                  <label>Name</label>
+                  <input ref={nameInputRef}></input>
+              </div>
+              <div>
+                  <label>Mobile No.</label>
+                  <input ref={mobileNoInputRef}></input>
+              </div>
+              <div>
+                  <label>Age</label>
+                  <input ref={ageInputRef}></input>
+              </div>
+              <div>
+                  <label>Email</label>
+                  <input ref={emailInputRef}></input>
+              </div>
+              <div>
+                  <label>Password</label>
+                  <input ref={passwordInputRef}></input>
+              </div>
+              <div>
+                  <label>Profile Pic</label>
+                  <input ref={profilePicInputRef}></input>
+              </div>
+              <div>
+                  <button
+                      type="button"
+                      onClick={() => {
+                          signupToSever();
+                  }}>Submit</button>
+              </div>
+          </form>
+    </div>
+  )
+}
+
+export default Signup
+
+
+=========================================================
+
+==>for encoded
+
+=======================================================
+
+==>in server
+
+=======================================================
+
+const express = require("express");
+const cors = require("cors");
+const mysql = require("mysql");
+
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded());
+
+app.post("/signup", (req, res) => {
+    console.log(req.body);
+    res.json([`dummy account created successfully`]);
+})
+
+app.listen(4567, () => {
+    console.log(`listening to port 4567`);
+})
+
+
+===================================================
+
+==>in app.js
+
+===================================================
+
+
+import React, { useRef } from 'react'
+
+function Signup() {
+
+    let nameInputRef = useRef();
+    let mobileNoInputRef = useRef();
+    let ageInputRef = useRef();
+    let emailInputRef = useRef();
+    let passwordInputRef = useRef();
+    let profilePicInputRef = useRef();
+
+    let signupToSever = async () => {
+
+        let dataToSend = {
+            name: nameInputRef.current.value,
+            mobileNO: mobileNoInputRef.current.value,
+            age: ageInputRef.current.value,
+            email: emailInputRef.current.value,
+            password: passwordInputRef.current.value,
+        };
+
+        let myHeaders = new Headers()
+        myHeaders.append("content-type", "application/json");
+
+        
+        let reqOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: JSON.stringify(dataToSend),
+        };
+
+
+        let JSONData = await fetch("http://localhost:4567/signup", reqOptions);
+        let JSOData = await JSONData.json();
+        console.log(JSOData);
+    };
+
+    
+        
+        
+    let signupToServerUsingURLEncoded = async () => {
+
+        let myHeaders = new Headers();
+        myHeaders.append("content-type", "application/x-www-form-urlencoded");
+        
+        let dataToSend = new URLSearchParams();
+        dataToSend.append("name", nameInputRef.current.value);
+        dataToSend.append("mobileNo", mobileNoInputRef.current.value);
+        dataToSend.append("age", ageInputRef.current.value);
+        dataToSend.append("email", emailInputRef.current.value);
+        dataToSend.append("password", passwordInputRef.current.value);
+
+
+        let reqOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body:dataToSend,            
+        }
+
+        let JSONData = await fetch("http://localhost:4567/signup", reqOptions);
+
+        let JSOData = await JSONData.json();
+
+        console.log(JSOData);
+        }
+  return (
+      <div>
+          <form>
+              <div>
+                  <label>Name</label>
+                  <input ref={nameInputRef}></input>
+              </div>
+              <div>
+                  <label>Mobile No.</label>
+                  <input ref={mobileNoInputRef}></input>
+              </div>
+              <div>
+                  <label>Age</label>
+                  <input ref={ageInputRef}></input>
+              </div>
+              <div>
+                  <label>Email</label>
+                  <input ref={emailInputRef}></input>
+              </div>
+              <div>
+                  <label>Password</label>
+                  <input ref={passwordInputRef}></input>
+              </div>
+              <div>
+                  <label>Profile Pic</label>
+                  <input ref={profilePicInputRef}></input>
+              </div>
+              <div>
+                  <button
+                      type="button"
+                      onClick={() => {
+                          signupToSever();
+                  }}>Submit JSON</button>
+              </div>
+
+              <div>
+                  <button
+                      type='button'
+                      onClick={() => {
+                      signupToServerUsingURLEncoded();
+                  }}>Submit URLEncoded</button>
+              </div>
+          </form>
+    </div>
+  )
+}
+
+export default Signup
+
+===============================================================
+
+=>sending data from sever to data base
+
+===============================================================
+
+const express = require("express");
+const cors = require("cors");
+const mysql = require("mysql");
+
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded());
+
+app.post("/signup", (req, res) => {
+    console.log(req.body);
+
+    let query = `insert into users (name,mobileNo,age,email,password)values('${req.body.name}','${req.body.mobileNo}',${req.body.age},'${req.body.email}','${req.body.password}')`;
+    
+    console.log(query);
+    
+    connection.query(query, (err, results) => {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json({ status: "success", msg: "Account created successfully" });
+        }
+    });
+})
+
+app.listen(4567, () => {
+    console.log(`listening to port 4567`);
+})
+
+let connection = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "root",
+    port: 3306,
+    database: "signup2302"
+});
+
+connection.connect((err) => {
+    if (err) {
+        console.log("unable ro connect to db");
+    }
+    else {
+        console.log("connected to db successfully");
+    };
+});
+=====================================================
+
+==>setting image preview single image same for files 
+
+=====================================================
+
+let [imagePreviewURL, setImagePreviewURL] = useState("./images/profilepic-1.jfif");
+
+<div>
+                  <label>Profile Pic</label>
+                  <input type='file'  ref={profilePicInputRef} onChange={() => {
+                      console.log(profilePicInputRef.current.files);
+
+                      let selectedImageURL = URL.createObjectURL(profilePicInputRef.current.files[0]);
+
+                      setImagePreviewURL(selectedImageURL);
+                      console.log(selectedImageURL);
+                  }}></input>
+                  <img id='profilePicPreview' src={imagePreviewURL} alt='profilePic'></img>
+              </div>
+==========================================================
+
+4 parts
+==============
+
+1 showing preview
+2 adding the selected files into form data 
+3 configuring the disk storage where to storege what to storage and what should be the file name
+4 inserting into data base
+
+=======================================================
+
+==>for Form data
+
+
+========================================================
+
+==>server.js
+
+===================================================== 
+const express = require("express");
+const cors = require("cors");
+const mysql = require("mysql");
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination:  (req, file, cb) => {
+    cb(null, 'uploads')
+  },
+    filename: (req, file, cb) => {
+        console.log(file);
+    
+      cb(null,Date.now()+"_"+file.originalname);
+  }
+})
+
+const upload = multer({ storage: storage })
+
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded());
+
+
+
+app.post("/signup",upload.single("profilePic"), (req, res) => {
+    console.log(req.body);
+    console.log(req.file);
+
+    let profilePicPath = `${req.file.destination}/${req.file.filename}`;
+
+    let query = `insert into users (name,mobileNo,age,email,password,profilePic)values('${req.body.name}','${req.body.mobileNo}',${req.body.age},'${req.body.email}','${req.body.password}','${profilePicPath}')`;
+    
+    console.log(query);
+    
+    connection.query(query, (err, results) => {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json({ status: "success", msg: "Account created successfully" });
+        }
+    });
+})
+
+app.listen(4567, () => {
+    console.log(`listening to port 4567`);
+})
+
+let connection = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "root",
+    port: 3306,
+    database: "signup2302"
+});
+
+connection.connect((err) => {
+    if (err) {
+        console.log("unable ro connect to db");
+    }
+    else {
+        console.log("connected to db successfully");
+    };
+});
+
+======================================================================================
+
+==>app.js
+
+========================================================================================
+
+import React, { useRef, useState } from 'react'
+
+function Signup() {
+
+    let nameInputRef = useRef();
+    let mobileNoInputRef = useRef();
+    let ageInputRef = useRef();
+    let emailInputRef = useRef();
+    let passwordInputRef = useRef();
+    let profilePicInputRef = useRef();
+
+    let [imagePreviewURL, setImagePreviewURL] = useState("./images/profilepic-1.jfif");
+
+    let signupToSever = async () => {
+
+        let dataToSend = {
+            name: nameInputRef.current.value,
+            mobileNo: mobileNoInputRef.current.value,
+            age: ageInputRef.current.value,
+            email: emailInputRef.current.value,
+            password: passwordInputRef.current.value,
+        };
+
+        let myHeaders = new Headers()
+        myHeaders.append("content-type", "application/json");
+
+        
+        let reqOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: JSON.stringify(dataToSend),
+        };
+
+
+        let JSONData = await fetch("http://localhost:4567/signup", reqOptions);
+        let JSOData = await JSONData.json();
+        console.log(JSOData);
+    };
+
+    
+        
+        
+    let signupToServerUsingURLEncoded = async () => {
+
+        let myHeaders = new Headers();
+        myHeaders.append("content-type", "application/x-www-form-urlencoded");
+        
+        let dataToSend = new URLSearchParams();
+        dataToSend.append("name", nameInputRef.current.value);
+        dataToSend.append("mobileNo", mobileNoInputRef.current.value);
+        dataToSend.append("age", ageInputRef.current.value);
+        dataToSend.append("email", emailInputRef.current.value);
+        dataToSend.append("password", passwordInputRef.current.value);
+
+
+        let reqOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: dataToSend,
+        }
+
+        let JSONData = await fetch("http://localhost:4567/signup", reqOptions);
+
+        let JSOData = await JSONData.json();
+
+        console.log(JSOData);
+    };
+    
+    
+    let signupToServerUsingFormData = async () => {
+
+                
+        let dataToSend = new FormData();
+        dataToSend.append("name", nameInputRef.current.value);
+        dataToSend.append("mobileNo",mobileNoInputRef.current.value);
+        dataToSend.append("age", ageInputRef.current.value);
+        dataToSend.append("email", emailInputRef.current.value);
+        dataToSend.append("password", passwordInputRef.current.value);
+
+        for (let i = 0; i < profilePicInputRef.current.files.length; i++){
+            dataToSend.append("profilePic", profilePicInputRef.current.files[i]);
+        }
+        // dataToSend.append("profilePic", profilePicInputRef.current.files[0]);
+
+
+        let reqOptions = {
+            method: "POST",
+            body:dataToSend,            
+        }
+
+        let JSONData = await fetch("http://localhost:4567/signup", reqOptions);
+
+        let JSOData = await JSONData.json();
+
+        console.log(JSOData);
+    }
+  return (
+      <div>
+          <form>
+              <div>
+                  <label>Name</label>
+                  <input ref={nameInputRef}></input>
+              </div>
+              <div>
+                  <label>Mobile No.</label>
+                  <input ref={mobileNoInputRef}></input>
+              </div>
+              <div>
+                  <label>Age</label>
+                  <input ref={ageInputRef}></input>
+              </div>
+              <div>
+                  <label>Email</label>
+                  <input ref={emailInputRef}></input>
+              </div>
+              <div>
+                  <label>Password</label>
+                  <input type="password" ref={passwordInputRef}></input>
+              </div>
+              <div>
+                  <label>Profile Pic</label>
+                  <input type='file'
+                      ref={profilePicInputRef}
+                      onChange={() => {
+                      console.log(profilePicInputRef.current.files);
+
+                      let selectedImageURL = URL.createObjectURL(profilePicInputRef.current.files[0]);
+
+                      setImagePreviewURL(selectedImageURL);
+                      console.log(selectedImageURL);
+                  }}></input>
+                  <img id='profilePicPreview' src={imagePreviewURL} alt='profilePic'></img>
+              </div>
+              <div>
+                  <button
+                      type="button"
+                      onClick={() => {
+                          signupToSever();
+                  }}>Submit JSON</button>
+              </div>
+
+              <div>
+                  <button
+                      type='button'
+                      onClick={() => {
+                      signupToServerUsingURLEncoded();
+                  }}>Submit URLEncoded</button>
+              </div>
+              <div>
+                  <button
+                      type='button'
+                      onClick={() => {
+                      signupToServerUsingFormData();
+                  }}>Submit FormData</button>
+              </div>
+          </form>
+    </div>
+  )
+}
+
+export default Signup
+
+===================================================================================================
+
+
+
+
+
+
